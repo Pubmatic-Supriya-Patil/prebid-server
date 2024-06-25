@@ -21,6 +21,9 @@
                 },
                 "appnexus": {
                   "placementId": 1
+                },
+                "districtm": {
+                  "placementId": 2
                 }
               }
             }
@@ -29,6 +32,9 @@
       ],
       "ext": {
         "prebid": {
+          "aliases": {
+            "districtm": "appnexus"
+        },
           "alternatebiddercodes": {
             "enabled": true,
             "bidders": {
@@ -170,12 +176,49 @@
               }
             ],
             "seat": "appnexus"
+          }
+        ]
+      }
+    },
+    "districtm": {
+      "expectRequest": {
+        "ortbRequest": {
+          "id": "some-request-id",
+          "site": {
+            "page": "test.somepage.com"
           },
+          "imp": [
+            {
+              "id": "imp-id-1",
+              "video": {
+                "mimes": [
+                  "video/mp4"
+                ]
+              },
+              "ext": {
+                "bidder": {
+                  "placementId": 2
+                }
+              }
+            }
+          ],
+          "ext": {
+            "prebid": {
+              "alternatebiddercodes": {
+                "enabled": true,
+                "bidders": null
+              }
+            }
+          }
+        }
+      },
+      "mockResponse": {
+        "pbsSeatBids": [
           {
             "pbsBids": [
               {
                 "ortbBid": {
-                  "id": "appnexus-bid-2",
+                  "id": "districtm-bid-1",
                   "impid": "imp-id-1",
                   "price": 0.3
                 },
@@ -185,11 +228,11 @@
                 }
               }
             ],
-            "seat": "groupm"
+            "seat": "districtm"
           }
         ]
       }
-    }
+  }
   },
   "response": {
     "bids": {
@@ -209,20 +252,6 @@
                     "adaptercode": "pubmatic"
                   },
                   "type": "video"
-                }
-              }
-            },
-            {
-              "id": "appnexus-bid-2",
-              "impid": "imp-id-1",
-              "price": 0.3,
-              "ext": {
-                "origbidcpm": 0.3,
-                "prebid": {
-                  "meta": {
-                    "adaptercode": "appnexus"
-                  },
-                  "type": "banner"
                 }
               }
             }
@@ -259,6 +288,25 @@
                 "prebid": {
                   "meta": {
                     "adaptercode": "appnexus"
+                  },
+                  "type": "banner"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seat": "districtm",
+          "bid": [
+            {
+              "id": "districtm-bid-1",
+              "impid": "imp-id-1",
+              "price": 0.3,
+              "ext": {
+                "origbidcpm": 0.3,
+                "prebid": {
+                  "meta": {
+                    "adaptercode": "districtm"
                   },
                   "type": "banner"
                 }
